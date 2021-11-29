@@ -22,7 +22,7 @@ const CartItem = ({item}) => {
                     <Typography>{item.quantity}</Typography>
                     <Button type="button" size="small">+</Button>
                 </div>
-                <Button variant="contained" type="button" color="secondary">Remove</Button>
+                <Button variant="contained" type="button" style = {{backgroundColor: "#EC8484"}} color='primary'>Remove</Button>
             </CardActions>
         </Card>
             
