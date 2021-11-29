@@ -14,10 +14,11 @@ const Product =({product})=> {
         <Typography variant = "h5" gutterButtom>
             {product.name}
             </Typography>
-            <Typography variant = "h5">
+            <Typography variant = "h6" style={{color: "#85bb65"}}>
             {product.price}
             </Typography>
     </div>
+    <Typography style = {{color: "#EC8484"}}>Seller: {product.seller_name}</Typography>
     <Typography variant = "body2" color ="textSecondary">
             {product.description}
             </Typography>
