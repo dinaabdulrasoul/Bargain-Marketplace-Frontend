@@ -5,7 +5,7 @@ import useStyles from './styles';
 import {Link, useLocation} from 'react-router-dom';
 import Product from '../Products/Product/Product';
 
-const SingleProduct = ({product, item_quantity}) => {
+const SingleProduct = ({product}) => {
     const classes = useStyles();
         return (
             <Grid   container
@@ -38,7 +38,7 @@ const SingleProduct = ({product, item_quantity}) => {
                 <div className = {classes.buttons}>
                     <Button type="button" size="small">-</Button>
                     </div>
-                    <Typography>{item_quantity}</Typography>
+                    <Typography><strong>{1}</strong></Typography>
                     <div>
                     <Button type="button" size="small">+</Button>
                 </div>
