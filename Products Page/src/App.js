@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Products, Navbar, Cart, SingleProduct} from './components';
+import Auth from './components/Auth/Auth';
 import { commerce } from './lib/commerce';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'; 
 
@@ -45,6 +46,7 @@ const item = {id: 1, name: 'Keyboard', seller_name: 'x store', description: 'sDK
         <div>
                 <Navbar totalItems = {3} />
             <Routes>
+                <Route path="/auth" exact element = {<Auth /> }/>
                 <Route exact path = '/' element = {<Products products = {mock_products}/>}>
                 </Route>
                 <Route exact path = "/my-products" element = {<Products products = {mock_products}  />}>
