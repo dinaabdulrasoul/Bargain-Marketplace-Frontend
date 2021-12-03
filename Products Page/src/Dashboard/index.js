@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -42,8 +42,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  const [page, setPage] = useState("Home");
   const classes = useStyles();
-
+  const handlePage = (text) => {
+    setPage(text);
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -66,7 +69,13 @@ export default function Dashboard() {
         <Divider />
         <List>
           {["Home", "Items", "Permissions"].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem
+              button
+              onClick={() => {
+                handlePage(text);
+              }}
+              key={text}
+            >
               <ListItemIcon>
                 {text === "Home" ? (
                   <HomeIcon />
@@ -83,8 +92,13 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>Welcome To Dashboard</Typography>
-        <Typography paragraph>This is dashboard</Typography>
+        {page === "Home" ? (
+          <Typography paragraph>home</Typography>
+        ) : page === "Items" ? (
+          <Typography paragraph>item</Typography>
+        ) : (
+          <Typography paragraph>Permissions</Typography>
+        )}
       </main>
     </div>
   );
