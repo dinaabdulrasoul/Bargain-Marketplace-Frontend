@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
@@ -48,6 +48,22 @@ const rows = [
 ];
 
 export default function DataGridDemo() {
+  const [selected, setSelected] = useState([]);
+  const [editRowsModel, setEditRowsModel] = useState({});
+
+  const handleEditRowsModelChange = React.useCallback((model) => {
+    setEditRowsModel(model);
+  }, []);
+
+  const removePermission = (selected) => {
+    //here we will send request to remove permission from this users from database
+  };
+
+  useEffect(() => {
+    //fetching data to show in rows
+    return () => {};
+  }, []);
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -57,6 +73,12 @@ export default function DataGridDemo() {
         rowsPerPageOptions={[5]}
         checkboxSelection
         disableSelectionOnClick
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          setSelected(selectedIDs);
+        }}
+        editRowsModel={editRowsModel}
+        onEditRowsModelChange={handleEditRowsModelChange}
       />
     </div>
   );
