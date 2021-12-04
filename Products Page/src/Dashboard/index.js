@@ -10,11 +10,13 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 
+import Home from "./components/Home";
+import Items from "./components/Items";
+import Permission from "./components/Permission";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -93,11 +95,11 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {page === "Home" ? (
-          <Typography paragraph>home</Typography>
+          <Home />
         ) : page === "Items" ? (
-          <Typography paragraph>item</Typography>
+          <Items />
         ) : (
-          <Typography paragraph>Permissions</Typography>
+          <Permission />
         )}
       </main>
     </div>
