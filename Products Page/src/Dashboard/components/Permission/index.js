@@ -65,7 +65,7 @@ export default function DataGridDemo() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: "80vh", width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -79,6 +79,14 @@ export default function DataGridDemo() {
         }}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={handleEditRowsModelChange}
+        sx={{
+          boxShadow: 2,
+          border: 2,
+          borderColor: "primary.light",
+          "& .MuiDataGrid-cell:hover": {
+            color: "primary.main",
+          },
+        }}
       />
     </div>
   );
