@@ -8,10 +8,16 @@ import Typography from "@mui/material/Typography";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import { Button } from "@mui/material";
 
+import CountUp from "react-countup";
+
 const Info = (
   <React.Fragment>
     <CardContent>
-      <Typography sx={{ fontSize: 40 }} color="text.primary" gutterBottom>
+      <Typography
+        sx={{ fontSize: 25, fontWeight: "bold" }}
+        color="text.primary"
+        gutterBottom
+      >
         Account Information
       </Typography>
       <Typography variant="h5" component="div">
@@ -32,11 +38,15 @@ const Balance = () => {
     <div>
       <React.Fragment>
         <CardContent>
-          <Typography sx={{ fontSize: 40 }} color="text.primary" gutterBottom>
+          <Typography
+            sx={{ fontSize: 25, fontWeight: "bold" }}
+            color="text.primary"
+            gutterBottom
+          >
             Account Current Cash balance
           </Typography>
           <Typography variant="h5" component="div">
-            Current Cash: {}
+            Current Cash: <CountUp end={100} duration={1} />
           </Typography>
           <CardActions>
             <Typography
