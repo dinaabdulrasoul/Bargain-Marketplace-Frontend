@@ -47,10 +47,11 @@ const Navbar = ({totalItems}) => {
                     BARGAIN MARKETPLACE
                 </Typography>
 
+                {((location.pathname !=='/'))&& (
                 <Typography component = {Link} to = "/" varient="h5" className = {classes.title} color="inherit" 
                 style={{ letterSpacing: 3, fontSize: 16 }}>
                     SHOP
-                </Typography>
+                </Typography> ) }
 
                 <div>
                 {user?.result ? (
