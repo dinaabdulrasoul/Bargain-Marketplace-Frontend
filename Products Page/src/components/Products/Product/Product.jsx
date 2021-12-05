@@ -9,7 +9,7 @@ const Product =({product})=> {
     const classes = useStyles();
     return (
         <Card className = {classes.root}>
-        <CardActionArea  component= {Link} to="/single-product">
+        <CardActionArea  component= {Link} to={`products/${product.id}`}>
         {/*<Link to={{pathname: `product/${product.name}`, query: { id: product.id }}}/>*/}
             <CardMedia className = {classes.media} image= {product.image} title = {product.name}/>
 <CardContent>
