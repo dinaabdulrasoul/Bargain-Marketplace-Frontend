@@ -3,9 +3,6 @@ import { Products, Navbar, Cart, SingleProduct } from "./components";
 import { commerce } from "./lib/commerce";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import Items from "./Dashboard/components/Items/Items";
-import Home from "./Dashboard/components/Home/Home";
-import Permission from "./Dashboard/components/Permission/Permission";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -115,42 +112,31 @@ const App = () => {
       "https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445",
   };
   return (
-    <>
-      <Router>
-        <div>
-          <Navbar totalItems={3} />
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={<Products products={mock_products} />}
-            ></Route>
-            <Route
-              exact
-              path="/my-products"
-              element={<Products products={mock_products} />}
-            ></Route>
-
-            <Route exact path="/cart" element={<Cart cart={cart} />}></Route>
-            <Route
-              exact
-              path="/single-product"
-              element={<SingleProduct product={item} />}
-            ></Route>
-          </Routes>
-        </div>
-      </Router>
-      <Router>
-        <Dashboard />
+    <Router>
+      <div>
+        <Navbar totalItems={3} />
         <Routes>
-          <Route exact path="/dashboard">
-            <Route exact path="home" element={<Home />} />
-            <Route exact path="items" element={<Items />} />
-            <Route exact path="permissions" element={<Permission />} />
-          </Route>
+          <Route
+            exact
+            path="/"
+            element={<Products products={mock_products} />}
+          ></Route>
+          <Route
+            exact
+            path="/my-products"
+            element={<Products products={mock_products} />}
+          ></Route>
+
+          <Route exact path="/cart" element={<Cart cart={cart} />}></Route>
+          <Route
+            exact
+            path="/single-product"
+            element={<SingleProduct product={item} />}
+          ></Route>
+          <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 };
 

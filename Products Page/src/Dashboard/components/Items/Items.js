@@ -56,7 +56,7 @@ export default function Items() {
   }, []);
 
   return (
-    <div style={{ height: "70vh", width: "80%", marginLeft: "245px" }}>
+    <div style={{ height: "70vh", width: "100%" }}>
       <div className="control-center">
         <Button
           disabled={selected.size ? false : true}
@@ -64,7 +64,7 @@ export default function Items() {
           color="error"
           onClick={deleteItem}
         >
-          Delete Selected Rows
+          Delete Selected Items
         </Button>
       </div>
       <DataGrid

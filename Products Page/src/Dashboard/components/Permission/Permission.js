@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import "./Permission.css";
+
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -69,7 +70,7 @@ export default function DataGridDemo() {
   }, []);
 
   return (
-    <div style={{ height: "70vh", width: "80%", marginLeft: "245px" }}>
+    <div style={{ height: "70vh", width: "100%" }}>
       <div className="control-center">
         <Button
           disabled={selected.size ? false : true}

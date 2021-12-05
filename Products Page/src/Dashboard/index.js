@@ -14,6 +14,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { Link } from "react-router-dom";
+
+import Items from "./components/Items/Items";
+import Home from "./components/Home/Home";
+import Permission from "./components/Permission/Permission";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -84,22 +89,21 @@ export default function Dashboard() {
                   <PersonAddAltIcon />
                 )}
               </ListItemIcon>
-              <Link to={`/dashboard/${text.toLowerCase()}`}>
-                <ListItemText primary={text} />
-              </Link>
+
+              <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/* {page === "Home" ? (
+        {page === "Home" ? (
           <Home />
         ) : page === "Items" ? (
           <Items />
         ) : (
           <Permission />
-        )} */}
+        )}
       </main>
     </div>
   );
