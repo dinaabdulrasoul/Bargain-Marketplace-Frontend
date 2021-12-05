@@ -49,9 +49,6 @@ const item = {id: 1, name: 'Keyboard', seller_name: 'x store', description: 'sDK
                 <Route path="/auth" exact element = {<Auth /> }/>
                 <Route exact path = '/' element = {<Products products = {mock_products}/>}>
                 </Route>
-                <Route exact path = "/my-products" element = {<Products products = {mock_products}  />}>
-                </Route>
-
                 <Route exact path = "/cart" element = {<Cart cart={{line_items: []}} /> }>
                     </Route>
                 <Route exact path = "/single-product" element = {<SingleProduct product = {item} /> }>
