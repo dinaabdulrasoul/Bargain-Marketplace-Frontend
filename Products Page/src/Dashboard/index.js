@@ -13,10 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-
-import Home from "./components/Home";
-import Items from "./components/Items";
-import Permission from "./components/Permission";
+import { Link } from "react-router-dom";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -87,20 +84,22 @@ export default function Dashboard() {
                   <PersonAddAltIcon />
                 )}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Link to={`/dashboard/${text.toLowerCase()}`}>
+                <ListItemText primary={text} />
+              </Link>
             </ListItem>
           ))}
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {page === "Home" ? (
+        {/* {page === "Home" ? (
           <Home />
         ) : page === "Items" ? (
           <Items />
         ) : (
           <Permission />
-        )}
+        )} */}
       </main>
     </div>
   );

@@ -46,7 +46,7 @@ const Balance = () => {
             Account Current Cash balance
           </Typography>
           <Typography variant="h5" component="div">
-            Current Cash: <CountUp end={100} duration={1} />
+            Current Cash: <CountUp end={100} duration={0.5} />
           </Typography>
           <CardActions>
             <Typography

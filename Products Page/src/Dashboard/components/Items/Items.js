@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-
+import { Button } from "@mui/material";
+import "./Items.css";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -46,6 +47,7 @@ export default function Items() {
 
   const deleteItem = (selected) => {
     //here we will send request to delete this items from database
+    console.log("hey");
   };
 
   useEffect(() => {
@@ -54,7 +56,17 @@ export default function Items() {
   }, []);
 
   return (
-    <div style={{ height: "80vh", width: "100%" }}>
+    <div style={{ height: "70vh", width: "80%", marginLeft: "245px" }}>
+      <div className="control-center">
+        <Button
+          disabled={selected.size ? false : true}
+          variant="outlined"
+          color="error"
+          onClick={deleteItem}
+        >
+          Delete Selected Rows
+        </Button>
+      </div>
       <DataGrid
         rows={rows}
         columns={columns}

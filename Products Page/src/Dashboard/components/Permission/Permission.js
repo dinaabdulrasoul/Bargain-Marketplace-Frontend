@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-
+import { Button } from "@mui/material";
+import "./Permission.css";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -36,7 +37,7 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 100, lastName: "Snow", firstName: "Jon", age: 35 },
   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
@@ -49,14 +50,17 @@ const rows = [
 
 export default function DataGridDemo() {
   const [selected, setSelected] = useState([]);
+
   const [editRowsModel, setEditRowsModel] = useState({});
 
   const handleEditRowsModelChange = React.useCallback((model) => {
     setEditRowsModel(model);
+    console.log(model);
   }, []);
 
-  const removePermission = (selected) => {
+  const removePermission = (selectionModel) => {
     //here we will send request to remove permission from this users from database
+    //selectionModel it's a SET  of unique ids of the user on the table
   };
 
   useEffect(() => {
@@ -65,7 +69,17 @@ export default function DataGridDemo() {
   }, []);
 
   return (
-    <div style={{ height: "80vh", width: "100%" }}>
+    <div style={{ height: "70vh", width: "80%", marginLeft: "245px" }}>
+      <div className="control-center">
+        <Button
+          disabled={selected.size ? false : true}
+          variant="outlined"
+          color="error"
+          onClick={removePermission}
+        >
+          Remove Selected Permission
+        </Button>
+      </div>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -76,9 +90,12 @@ export default function DataGridDemo() {
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
           setSelected(selectedIDs);
+          console.log(selected);
         }}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={handleEditRowsModelChange}
+        // onSelectionModelChange={selectedRows}
+
         sx={{
           boxShadow: 2,
           border: 2,
