@@ -51,8 +51,10 @@ const item = {id: 1, name: 'Keyboard', seller_name: 'x store', description: 'sDK
                 </Route>
                 <Route exact path = "/cart" element = {<Cart cart={{line_items: []}} /> }>
                     </Route>
-                <Route exact path = "/single-product" element = {<SingleProduct product = {item} /> }>
-                </Route>
+                {mock_products.map((product)=>(
+                    <Route exact path = {`products/${product.id}`} element = {<SingleProduct product = {item}/>}>
+                        </Route>
+                ))}
             </Routes>
             
         </div>
