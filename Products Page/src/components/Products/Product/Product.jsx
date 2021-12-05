@@ -10,7 +10,6 @@ const Product =({product})=> {
     return (
         <Card className = {classes.root}>
         <CardActionArea  component= {Link} to={`products/${product.id}`}>
-        {/*<Link to={{pathname: `product/${product.name}`, query: { id: product.id }}}/>*/}
             <CardMedia className = {classes.media} image= {product.image} title = {product.name}/>
 <CardContent>
     <div className = {classes.cardContent}>
@@ -18,7 +17,7 @@ const Product =({product})=> {
             {product.name}
             </Typography>
             <Typography variant = "h6" style={{color: "#85bb65"}}>
-            {product.price}
+            {product.price} EGP
             </Typography>
     </div>
     <Typography variant = "h7">Seller: <strong>{product.seller_name}</strong></Typography>
