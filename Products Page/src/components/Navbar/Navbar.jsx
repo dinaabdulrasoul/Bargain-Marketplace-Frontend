@@ -66,7 +66,7 @@ const Navbar = ({totalItems}) => {
 
 
                 <div className = {classes.grow} />
-                {((location.pathname ==='/'))&& (
+                {((location.pathname !=='/cart'))&& (
                 <div className = {classes.button}>
                     <IconButton component = {Link} to = '/cart' aria-label = "Show Cart Items">
                         <Badge badgeContent = {totalItems} color = "secondary">
