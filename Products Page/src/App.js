@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Products, Navbar, Cart, SingleProduct} from './components';
 import Auth from './components/Auth/Auth';
-import { commerce } from './lib/commerce';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'; 
 
 const App = () => {
