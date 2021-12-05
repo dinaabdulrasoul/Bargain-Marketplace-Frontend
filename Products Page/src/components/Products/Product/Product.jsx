@@ -10,6 +10,7 @@ const Product =({product})=> {
     return (
         <Card className = {classes.root}>
         <CardActionArea  component= {Link} to="/single-product">
+        {/*<Link to={{pathname: `product/${product.name}`, query: { id: product.id }}}/>*/}
             <CardMedia className = {classes.media} image= {product.image} title = {product.name}/>
 <CardContent>
     <div className = {classes.cardContent}>
