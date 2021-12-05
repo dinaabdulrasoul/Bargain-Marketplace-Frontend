@@ -5,7 +5,7 @@ import { commerce } from './lib/commerce';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'; 
 
 const App = () => {
-    const [products, setProducts] = useState([]);
+    {/*const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
 
     const fetchProducts = async() => {
@@ -26,7 +26,7 @@ const App = () => {
 useEffect(()=> {
     fetchProducts();
     fetchCart();
-}, []);
+}, []);*/}
 
 // Mock products for design only
 const mock_products = [
@@ -52,7 +52,7 @@ const item = {id: 1, name: 'Keyboard', seller_name: 'x store', description: 'sDK
                 <Route exact path = "/my-products" element = {<Products products = {mock_products}  />}>
                 </Route>
 
-                <Route exact path = "/cart" element = {<Cart cart={cart} /> }>
+                <Route exact path = "/cart" element = {<Cart cart={{line_items: []}} /> }>
                     </Route>
                 <Route exact path = "/single-product" element = {<SingleProduct product = {item} /> }>
                 </Route>
