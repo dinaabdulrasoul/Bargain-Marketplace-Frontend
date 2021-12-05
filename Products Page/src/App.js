@@ -39,8 +39,8 @@ const mock_products = [
     {id: 8, name: 'Addias Backbag', seller_name: 'x', description: 'Magic iPad Keyboard', price:'300 EGP', image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' }
 ];
 const item = {id: 1, name: 'Keyboard', seller_name: 'x store', description: 'sDKJnkjdsakljsdmjdslkdslkdlkdsklfdmdkmlfkmckmdxm,fkmd,mm,fmsdkjfmdlkfklsmflksmklfm',
- price:'300 EGP', image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' 
-,quantity: 1};
+ price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' 
+,quantity: 0};
     return (
         <Router>
         <div>
