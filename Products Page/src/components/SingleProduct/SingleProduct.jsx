@@ -4,8 +4,11 @@ import {AddShoppingCart} from '@material-ui/icons';
 import useStyles from './styles';
 import {Link, useLocation} from 'react-router-dom';
 import Product from '../Products/Product/Product';
+import {useState} from 'react';
+
 
 const SingleProduct = ({product}) => {
+    const [count, setCount] = useState(product.quantity);
     const classes = useStyles();
         return (
             <Grid   container
@@ -36,11 +39,11 @@ const SingleProduct = ({product}) => {
             <CardActions className = {classes.cardActions} alignItems="center"
             justifyContent="center">
                 <div className = {classes.buttons}>
-                    <Button type="button" size="small">-</Button>
+                    <Button type="button" size="small" onClick={() => {if(count!==0) setCount(count - 1)}}>-</Button>
                     </div>
-                    <Typography><strong>{1}</strong></Typography>
+                    <Typography><strong>{count}</strong></Typography>
                     <div>
-                    <Button type="button" size="small">+</Button>
+                    <Button type="button" size="small" onClick={() => setCount(count + 1)}>+</Button>
                 </div>
                 <Button variant="contained" type="button" style = {{backgroundColor: "#EC8484"}} color='primary'>Remove</Button>
             </CardActions>

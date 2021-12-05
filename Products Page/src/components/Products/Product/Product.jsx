@@ -24,7 +24,7 @@ const Product =({product})=> {
         </CardContent>
         <CardActions disableSpacing className = {classes.cardActions}>
             {/*<IconButton aria-label = "Add to Cart" onClick ={()=> onAddToCart(product.id, 1)}> */}
-            <IconButton aria-label = "Add to Cart"  component = {Link} to='/cart' >
+            <IconButton aria-label = "Add to Cart"  component = {Link} to='/cart'  >
                 <AddShoppingCart />
             </IconButton>
         </CardActions>
