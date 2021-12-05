@@ -9,6 +9,24 @@ import {useState} from 'react';
 
 const SingleProduct = ({product}) => {
     const [count, setCount] = useState(product.quantity);
+    const [total_price, setTotalPrice] = useState((product.price)*count);
+
+    const increaseQuantity = (count, price) => {
+        count = count + 1;
+        setCount(count);
+        price = count * price;
+        setTotalPrice(price);
+
+    };
+    const decreaseQuantity = (count,price) => {
+    if(count!==0) 
+    {   count = count - 1;
+        setCount(count);
+        price = count * price;
+        setTotalPrice(price); }
+};
+
+
     const classes = useStyles();
         return (
             <Grid   container
@@ -30,7 +48,7 @@ const SingleProduct = ({product}) => {
         <Typography variant = "h6">Seller: <strong>{product.seller_name}</strong></Typography>
         <div className = {classes.cardContent}>
                 <Typography variant = "h6" style={{color: "#85bb65"}}>
-                Price: {product.price}
+                Price: {product.price} EGP
                 </Typography>
         </div>
         <Typography> <strong> Item Description: </strong> </Typography>
@@ -39,15 +57,25 @@ const SingleProduct = ({product}) => {
             <CardActions className = {classes.cardActions} alignItems="center"
             justifyContent="center">
                 <div className = {classes.buttons}>
-                    <Button type="button" size="small" onClick={() => {if(count!==0) setCount(count - 1)}}>-</Button>
+                    <Button type="button" size="small" onClick={() => decreaseQuantity(count, product.price)}>-</Button>
                     </div>
                     <Typography><strong>{count}</strong></Typography>
                     <div>
-                    <Button type="button" size="small" onClick={() => setCount(count + 1)}>+</Button>
+                    <Button type="button" size="small" onClick={() => increaseQuantity(count, product.price)}>+</Button>
                 </div>
-                <Button variant="contained" type="button" style = {{backgroundColor: "#EC8484"}} color='primary'>Remove</Button>
+        
+                
+                <div className = {classes.buttons}>
+                    <Button variant="contained" type="button" style = {{backgroundColor: "#EC8484"}} color='primary'>Update Cart</Button>
+                    </div>
             </CardActions>
-    
+            { count!==0 && (
+            <div className = {classes.buttons}>
+                <Typography variant = "h6" style={{ textAlign: 'center' }} >
+                Total Price: <strong>{total_price}</strong> 
+                </Typography>
+                </div> ) }
+            
             </Card>
             </Grid>
 
