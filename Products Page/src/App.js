@@ -43,6 +43,8 @@ const mock_products = [
                     <Route exact path = {`products/${p.id}`} element = {<SingleProduct product = {p}/>}>
                         </Route>
                 ))}
+          <Route exact path = '/Create' element = {<AddProduct/>}>
+                </Route>
         </Routes>
       </div>
     </Router>
