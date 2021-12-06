@@ -3,6 +3,8 @@ import { Products, Navbar, Cart, SingleProduct } from "./components";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
+import Auth from "./components/Auth/Auth";
+import axios from "axios";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -110,7 +112,7 @@ const App = () => {
             path="/my-products"
             element={<Products products={mock_products} />}
           ></Route>
-
+          <Route path="/auth" exact element={<Auth />} />
           <Route exact path="/cart" element={<Cart cart={cart} />}></Route>
           <Route
             exact
