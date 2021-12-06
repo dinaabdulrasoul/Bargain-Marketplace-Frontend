@@ -4,6 +4,8 @@ import {ShoppingCart} from '@material-ui/icons';
 import logo from '../../assets/icon-big.png';
 import useStyles from './styles';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -53,6 +55,7 @@ const Navbar = ({totalItems}) => {
                     SHOP
                 </Typography> ) }
 
+                {((location.pathname !=='/auth'))&& (
                 <div>
                 {user?.result ? (
                 <div className={classes.profile}>
@@ -61,14 +64,22 @@ const Navbar = ({totalItems}) => {
                     <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button> 
                 </div>
                 ) : (
-                <Button component={Link} to="/auth" variant="contained" type="button" style = {{backgroundColor: "white", color: "black",fontFamily: 'Monospace',}} color="primary"><strong>Sign In</strong></Button>
+                <Button component={Link} to="/auth" style = {{backgroundColor: "white", color: "black",fontFamily: 'Monospace', fontSize:16}}>
+                    Sign In
+                    <LockOpenIcon/>
+                    </Button>
                 )}
-                </div>
+                </div> )}
 
 
                 <div className = {classes.grow} />
                 {((location.pathname !=='/cart'))&& (
                 <div className = {classes.button}>
+                    <Button component = {Link} to = '/cart' aria-label = "Add Product" style = {{fontFamily: 'Monospace',letterSpacing: 2, fontSize:16}}>
+                        Add Product
+                            <AddIcon />
+                    </Button>
+
                     <IconButton component = {Link} to = '/cart' aria-label = "Show Cart Items">
                         <Badge badgeContent = {totalItems} color = "secondary">
                             <ShoppingCart />
