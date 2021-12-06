@@ -9,7 +9,7 @@ const Product =({product})=> {
     const classes = useStyles();
     return (
         <Card className = {classes.root}>
-        <CardActionArea  component= {Link} to="/single-product">
+        <CardActionArea  component= {Link} to={`products/${product.id}`}>
             <CardMedia className = {classes.media} image= {product.image} title = {product.name}/>
 <CardContent>
     <div className = {classes.cardContent}>
@@ -17,14 +17,14 @@ const Product =({product})=> {
             {product.name}
             </Typography>
             <Typography variant = "h6" style={{color: "#85bb65"}}>
-            {product.price}
+            {product.price} EGP
             </Typography>
     </div>
     <Typography variant = "h7">Seller: <strong>{product.seller_name}</strong></Typography>
         </CardContent>
         <CardActions disableSpacing className = {classes.cardActions}>
             {/*<IconButton aria-label = "Add to Cart" onClick ={()=> onAddToCart(product.id, 1)}> */}
-            <IconButton aria-label = "Add to Cart"  component = {Link} to='/cart' >
+            <IconButton aria-label = "Add to Cart"  component = {Link} to='/cart'  >
                 <AddShoppingCart />
             </IconButton>
         </CardActions>

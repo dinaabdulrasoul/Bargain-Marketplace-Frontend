@@ -1,12 +1,16 @@
+
 import React, { useState, useEffect } from "react";
 import { Products, Navbar, Cart, SingleProduct } from "./components";
 import { commerce } from "./lib/commerce";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
+import Auth from './components/Auth/Auth';
+import axios from 'axios';
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -24,6 +28,7 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCart();
+
   }, []);
 
   // Mock products for design only
@@ -126,7 +131,7 @@ const App = () => {
             path="/my-products"
             element={<Products products={mock_products} />}
           ></Route>
-
+            <Route path="/auth" exact element = {<Auth /> }/>
           <Route exact path="/cart" element={<Cart cart={cart} />}></Route>
           <Route
             exact
@@ -139,5 +144,6 @@ const App = () => {
     </Router>
   );
 };
+
 
 export default App;
