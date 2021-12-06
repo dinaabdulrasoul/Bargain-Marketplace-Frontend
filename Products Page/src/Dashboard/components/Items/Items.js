@@ -43,6 +43,7 @@ export default function Items() {
 
   const handleEditRowsModelChange = React.useCallback((model) => {
     setEditRowsModel(model);
+    console.log(model);
   }, []);
 
   const deleteItem = (selected) => {

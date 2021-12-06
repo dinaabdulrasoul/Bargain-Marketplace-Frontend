@@ -13,7 +13,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { Link } from "react-router-dom";
 
 import Items from "./components/Items/Items";
 import Home from "./components/Home/Home";
@@ -48,9 +47,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const [page, setPage] = useState("Home");
   const classes = useStyles();
+
   const handlePage = (text) => {
     setPage(text);
   };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
