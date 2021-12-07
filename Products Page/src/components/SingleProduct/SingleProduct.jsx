@@ -35,7 +35,7 @@ const SingleProduct = ({product}) => {
             alignItems="center"
             justifyContent="center"
             style={{ minHeight: '100vh' }}>
-                 <Card   className = {classes.root} spacing = {3} style={{ minHeight: '100vh', maxWidth: "50%" }}>
+                 <Card   className = {classes.root} spacing = {3} style={{ minHeight: '100vh', minWidth: "50%" }}>
                 <CardMedia className = {classes.media} image= {product.image} title = {product.name}
                 r={200} />
     <CardContent>
