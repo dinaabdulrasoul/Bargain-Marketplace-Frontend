@@ -43,6 +43,7 @@ input {
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
+  align-content: center;
 }
 
 .materialUIInput {
@@ -53,7 +54,7 @@ input {
   background-color: white;
   padding: 10px 15px;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .IceCreamType {
@@ -67,8 +68,8 @@ label {
   margin-bottom: 13px;
   margin-top: 20px;
   color: solid black;
-  font-size: solid 14px;
-  font-weight: 200;
+  font-size: 19px;
+  font-weight: 500;
 }
 
 button,
