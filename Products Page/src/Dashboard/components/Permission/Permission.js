@@ -2,38 +2,28 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import "./Permission.css";
+import { getAllUsers } from "../../../api";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "firstName",
+    field: "first_name",
     headerName: "First name",
     width: 150,
     editable: true,
   },
   {
-    field: "lastName",
+    field: "last_name",
     headerName: "Last name",
     width: 150,
     editable: true,
   },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "email",
+    headerName: "Email",
+
     width: 110,
     editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, "firstName") || ""} ${
-        params.getValue(params.id, "lastName") || ""
-      }`,
   },
 ];
 
@@ -51,7 +41,7 @@ const rows = [
 
 export default function DataGridDemo() {
   const [selected, setSelected] = useState([]);
-
+  const [Users, setUsers] = useState([]);
   const [editRowsModel, setEditRowsModel] = useState({});
 
   const handleEditRowsModelChange = React.useCallback((model) => {
@@ -66,12 +56,17 @@ export default function DataGridDemo() {
 
   useEffect(() => {
     //fetching data to show in rows
-    return () => {};
+    const fetchUsers = async () => {
+      let urs = await getAllUsers();
+      setUsers(urs.data);
+    };
+    fetchUsers();
   }, []);
 
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <div className="control-center">
+        {console.log(Users)}
         <Button
           disabled={selected.size ? false : true}
           variant="outlined"
@@ -82,7 +77,7 @@ export default function DataGridDemo() {
         </Button>
       </div>
       <DataGrid
-        rows={rows}
+        rows={Users}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

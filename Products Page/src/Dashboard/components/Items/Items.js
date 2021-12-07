@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import "./Items.css";
+import { getAllItemsByUsers } from "../../../api";
+import jwt from "jwt-decode";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
-    field: "ItemName",
+    field: "title",
     headerName: "Item Name",
     width: 150,
     editable: true,
   },
   {
-    field: "Quantity",
-    headerName: "Quantity",
+    field: "description",
+    headerName: "description",
     width: 150,
     editable: true,
   },
@@ -40,6 +42,7 @@ const rows = [
 export default function Items() {
   const [selected, setSelected] = useState([]);
   const [editRowsModel, setEditRowsModel] = useState({});
+  const [items, setItems] = useState([]);
 
   const handleEditRowsModelChange = React.useCallback((model) => {
     setEditRowsModel(model);
@@ -51,8 +54,19 @@ export default function Items() {
   };
 
   useEffect(() => {
+    let token = localStorage.getItem("profile");
+    let { id } = jwt(token);
+    console.log(id);
+
     //fetching data to show in rows
-    return () => {};
+
+    const fetchItems = async (id) => {
+      console.log("fetchiiing", id);
+      let urs = await getAllItemsByUsers(id);
+      setItems(urs.data);
+    };
+
+    fetchItems(id);
   }, []);
 
   return (
@@ -68,7 +82,7 @@ export default function Items() {
         </Button>
       </div>
       <DataGrid
-        rows={rows}
+        rows={items}
         columns={columns}
         pPriceSize={5}
         rowsPerPPriceOptions={[5]}

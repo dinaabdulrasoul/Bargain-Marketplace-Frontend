@@ -1,44 +1,50 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
+
+import jwt from "jwt-decode";
 import { useForm, Controller } from "react-hook-form";
-import { Checkbox, Input, Typography, Grid } from "@material-ui/core";
+
 import { Input as AntdInput, InputNumber } from "antd";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import FlatButton from "@material-ui/core/Button";
-import LinkedCameraIcon from '@mui/icons-material/LinkedCamera';
+import { addItem } from "../../api";
 import "./styles.css";
 
-
-
 const AddProduct = () => {
-    
-    const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
+  const [isAuthenticated, setAuthenticated] = useState(false);
 
-    const onSubmit = (data) => {
-      alert(JSON.stringify(data));
-    };
+  const onSubmit = async (data) => {
+    if (isAuthenticated) {
+      let token = localStorage.getItem("profile");
+      let { id } = jwt(token);
+      data = { ...data, user_id: id };
+    }
+    await addItem(data);
+  };
 
-    return(
-      <form onSubmit={handleSubmit(onSubmit)}>
+  useEffect(() => {
+    if (localStorage.getItem("profile")) {
+      setAuthenticated(true);
+    }
+  }, []);
+  return isAuthenticated ? (
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label>Product Image</label>
       <Controller
-        render={({ field }) => <input type="file" ref={control} />}
-        name="productImage"
+        render={({ field }) => <AntdInput {...field} />}
+        name="image"
         control={control}
         defaultValue=""
       />
       <label>Product Name</label>
       <Controller
         render={({ field }) => <AntdInput {...field} />}
-        name="productName"
+        name="title"
         control={control}
         defaultValue=""
       />
       <label>Product Description</label>
       <Controller
         render={({ field }) => <AntdInput {...field} />}
-        name="productDescription"
+        name="description"
         control={control}
         defaultValue=""
       />
@@ -46,15 +52,25 @@ const AddProduct = () => {
       <label>Product Price</label>
       <Controller
         render={({ field }) => <InputNumber {...field} min={1} />}
-        name="productPrice"
+        name="price"
         control={control}
         defaultValue=""
       />
 
       <input type="submit" />
     </form>
- 
-    );
-}
+  ) : (
+    <h2
+      style={{
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      Please Login to Add product
+    </h2>
+  );
+};
 
-export default AddProduct
+export default AddProduct;
