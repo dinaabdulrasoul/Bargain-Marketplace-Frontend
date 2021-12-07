@@ -51,15 +51,15 @@ const SingleProduct = ({product}) => {
                 Price: {product.price} EGP
                 </Typography>
         </div>
-        <Typography> <strong> Item Description: </strong> </Typography>
-        <Typography style={{color:"#808080"}}>{product.description}</Typography>
+        <Typography variant = "h6"> <strong> Item Description: </strong> </Typography>
+        <Typography variant = "h7">{product.description}</Typography>
             </CardContent>
             <CardActions className = {classes.cardActions} alignItems="center"
             justifyContent="center">
                 <div className = {classes.buttons}>
                     <Button type="button" size="small" onClick={() => decreaseQuantity(count, product.price)}>-</Button>
                     </div>
-                    <Typography><strong>{count}</strong></Typography>
+                    <Typography variant = "h7"><strong>{count}</strong></Typography>
                     <div>
                     <Button type="button" size="small" onClick={() => increaseQuantity(count, product.price)}>+</Button>
                 </div>

@@ -13,7 +13,7 @@ const Product =({product})=> {
             <CardMedia className = {classes.media} image= {product.image} title = {product.name}/>
 <CardContent>
     <div className = {classes.cardContent}>
-        <Typography variant = "h5" gutterButtom>
+        <Typography variant = "h6" gutterButtom>
             {product.name}
             </Typography>
             <Typography variant = "h6" style={{color: "#85bb65"}}>

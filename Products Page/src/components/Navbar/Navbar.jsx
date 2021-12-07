@@ -69,7 +69,7 @@ const Navbar = ({totalItems}) => {
                 <div className = {classes.grow} />
                 {((location.pathname !=='/cart'))&& (
                 <div className = {classes.button}>
-                    <Button component = {Link} to = '/cart' aria-label = "Add Product" style = {{fontFamily: 'Monospace',letterSpacing: 2, fontSize:16}}>
+                    <Button component = {Link} to = '/Create' aria-label = "Add Product" style = {{fontFamily: 'Monospace',letterSpacing: 2, fontSize:16}}>
                         Add Product
                             <AddIcon />
                     </Button>

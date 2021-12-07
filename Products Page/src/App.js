@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Products, Navbar, Cart, SingleProduct } from "./components";
+import { Products, Navbar, Cart, SingleProduct, AddProduct } from "./components";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
@@ -43,6 +43,8 @@ const mock_products = [
                     <Route exact path = {`products/${p.id}`} element = {<SingleProduct product = {p}/>}>
                         </Route>
                 ))}
+          <Route exact path = '/Create' element = {<AddProduct/>}>
+                </Route>
         </Routes>
       </div>
     </Router>
