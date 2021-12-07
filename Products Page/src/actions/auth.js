@@ -7,7 +7,11 @@ export const signin = (formData, router) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
 
+<<<<<<< HEAD
     router("/");
+=======
+    router('/');
+>>>>>>> 9c8e77753427700a7785a42956ffdfcb87bc8a44
   } catch (error) {
     console.log(error);
   }
@@ -19,7 +23,11 @@ export const signup = (formData, router) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
 
+<<<<<<< HEAD
     router("/");
+=======
+    router('/');
+>>>>>>> 9c8e77753427700a7785a42956ffdfcb87bc8a44
   } catch (error) {
     console.log(error);
   }
