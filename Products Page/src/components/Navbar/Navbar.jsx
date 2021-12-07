@@ -85,9 +85,13 @@ const Navbar = ({ totalItems }) => {
                     {/* {user?.result.name} */}
                   </Typography>
                   <Button
-                    variant="contained"
+                                    style={{
+                                      backgroundColor: "white",
+                                      color: "black",
+                                      fontFamily: "Monospace",
+                                      fontSize: 16,
+                                    }}
                     className={classes.logout}
-                    color="black"
                     onClick={logout}
                   >
                     Logout
