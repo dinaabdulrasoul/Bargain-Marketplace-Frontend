@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Grid,
@@ -14,11 +14,14 @@ import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
 import { Link, useLocation } from "react-router-dom";
 import Product from "../Products/Product/Product";
-import { useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCartState } from "../../actions/cart";
 
 const SingleProduct = ({ product }) => {
   const [count, setCount] = useState(0);
   const [total_price, setTotalPrice] = useState(product.price * count);
+  const dispatch = useDispatch();
 
   const increaseQuantity = (count, price) => {
     count = count + 1;
@@ -33,6 +36,10 @@ const SingleProduct = ({ product }) => {
       price = count * price;
       setTotalPrice(price);
     }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addItemToCartState({}));
   };
 
   const classes = useStyles();
@@ -115,6 +122,7 @@ const SingleProduct = ({ product }) => {
               type="button"
               style={{ backgroundColor: "#EC8484" }}
               color="primary"
+              onClick={handleAddToCart}
             >
               Update Cart
             </Button>

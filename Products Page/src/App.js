@@ -11,10 +11,15 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Auth from "./components/Auth/Auth";
 import { getAllItems } from "./api";
+import { useDispatch, useSelector } from "react-redux";
+import jwt from "jwt-decode";
+import { userAction } from "./actions/user";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetch = async () => {
@@ -23,7 +28,15 @@ const App = () => {
       setProducts(products.data);
     };
     fetch();
-  }, []);
+
+    if (localStorage.getItem("profile")) {
+      console.log("heeeey");
+      let token = localStorage.getItem("profile");
+      let decoded = jwt(token);
+      let user = { name: decoded.first_name, id: decoded.id };
+      dispatch(userAction({ user }));
+    }
+  }, [user]);
 
   // Mock products for design only
   // const mock_products = [
@@ -55,7 +68,7 @@ const App = () => {
             path="/cart"
             element={<Cart cart={{ line_items: [] }} />}
           ></Route>
-          {console.log(products)}
+
           {products.map((p) => (
             <Route
               exact

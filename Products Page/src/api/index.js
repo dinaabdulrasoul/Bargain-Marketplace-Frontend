@@ -17,3 +17,6 @@ export const addItem = (data) => API.post("/items", data);
 export const getAllItems = () => API.get("/items");
 export const getAllUsers = () => API.get("/users");
 export const getAllItemsByUsers = (id) => API.get(`/items/user/${id}`);
+
+export const getCartItem = (id) => API.get(`/cart/${id}`);
+export const addCartItem = (data) => API.post("/cart/add/", data);

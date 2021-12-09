@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import jwt from "jwt-decode";
+import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 
 import { Input as AntdInput, InputNumber } from "antd";
@@ -10,21 +10,18 @@ import "./styles.css";
 const AddProduct = () => {
   const { control, handleSubmit } = useForm();
   const [isAuthenticated, setAuthenticated] = useState(false);
-
+  const user = useSelector((state) => state.userReducer);
   const onSubmit = async (data) => {
-    if (isAuthenticated) {
-      let token = localStorage.getItem("profile");
-      let { id } = jwt(token);
-      data = { ...data, user_id: id };
-    }
+    data = { ...data, user_id: user.id };
     await addItem(data);
   };
 
   useEffect(() => {
-    if (localStorage.getItem("profile")) {
+    if (user.id) {
       setAuthenticated(true);
     }
   }, []);
+
   return isAuthenticated ? (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>Product Image</label>

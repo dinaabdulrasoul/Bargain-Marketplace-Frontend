@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardMedia,
@@ -11,9 +11,19 @@ import {
 import { AddShoppingCart } from "@material-ui/icons";
 import useStyles from "./styles";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { postCartItem } from "../../../actions/cart";
 
 //const Product = ({product, onAddToCart})
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.userReducer);
+
+  const handleClick = (prodId) => {
+    let data = { item_id: prodId, user_id: user.id };
+    dispatch(postCartItem(data));
+  };
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -38,7 +48,12 @@ const Product = ({ product }) => {
         </CardContent>
         <CardActions disableSpacing className={classes.cardActions}>
           {/*<IconButton aria-label = "Add to Cart" onClick ={()=> onAddToCart(product.id, 1)}> */}
-          <IconButton aria-label="Add to Cart" component={Link} to="/cart">
+          <IconButton
+            onClick={() => handleClick(product.id)}
+            aria-label="Add to Cart"
+            component={Link}
+            to="/cart"
+          >
             <AddShoppingCart />
           </IconButton>
         </CardActions>
