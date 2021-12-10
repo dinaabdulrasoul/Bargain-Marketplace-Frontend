@@ -13,12 +13,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Items from "./components/Items/Items";
 import Home from "./components/Home/Home";
 import Permission from "./components/Permission/Permission";
-
+import axios from "axios";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const [page, setPage] = useState("Home");
   const [isAuthenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const classes = useStyles();
+  const data = useSelector((state) => state.userReducer);
   const handlePage = (text) => {
     setPage(text);
   };
@@ -57,6 +59,12 @@ export default function Dashboard() {
     if (localStorage.getItem("profile")) {
       setAuthenticated(true);
     }
+    const fetchUser = async () => {
+      let user = await axios.get(`http://localhost:5000/users/${data.id}`);
+      console.log(user.data);
+      setUser(user.data);
+    };
+    fetchUser();
   }, []);
   return isAuthenticated ? (
     <div className={classes.root}>
@@ -104,8 +112,9 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
         {page === "Home" ? (
-          <Home />
+          <Home user={user} />
         ) : page === "Items" ? (
           <Items />
         ) : (

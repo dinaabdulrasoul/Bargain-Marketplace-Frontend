@@ -19,7 +19,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     const fetch = async () => {
@@ -52,7 +52,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Navbar totalItems={3} />
+        <Navbar />
         <Routes>
           <Route
             exact

@@ -10,29 +10,6 @@ import { Button } from "@mui/material";
 
 import CountUp from "react-countup";
 
-const Info = (
-  <React.Fragment>
-    <CardContent>
-      <Typography
-        sx={{ fontSize: 25, fontWeight: "bold" }}
-        color="text.primary"
-        gutterBottom
-      >
-        Account Information
-      </Typography>
-      <Typography variant="h5" component="div">
-        Name: {}
-      </Typography>
-      <Typography variant="h5" component="div">
-        Email: {}
-      </Typography>
-      <Typography variant="h5" component="div">
-        Items Count: {}
-      </Typography>
-    </CardContent>
-  </React.Fragment>
-);
-
 const Balance = () => {
   return (
     <div>
@@ -66,7 +43,28 @@ const Balance = () => {
   );
 };
 
-export default function OutlinedCard({ type }) {
+export default function OutlinedCard({ type, user }) {
+  const Info = (
+    <React.Fragment>
+      {console.log(user)}
+      <CardContent>
+        <Typography
+          sx={{ fontSize: 25, fontWeight: "bold" }}
+          color="text.primary"
+          gutterBottom
+        >
+          Account Information
+        </Typography>
+        <Typography variant="h5" component="div">
+          Name: {user?.first_name}
+          {user?.last_name}
+        </Typography>
+        <Typography variant="h5" component="div">
+          Email: {user?.email}
+        </Typography>
+      </CardContent>
+    </React.Fragment>
+  );
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">{type === "info" ? Info : Balance()}</Card>

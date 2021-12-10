@@ -4,7 +4,8 @@ import { Button } from "@mui/material";
 import "./Items.css";
 import { getAllItemsByUsers } from "../../../api";
 import jwt from "jwt-decode";
-import axios from "axios";
+import axios, { Axios } from "axios";
+import { useSelector } from "react-redux";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -20,7 +21,7 @@ const columns = [
     editable: true,
   },
   {
-    field: "Price",
+    field: "price",
     headerName: "Price",
     type: "number",
     width: 110,
@@ -44,9 +45,11 @@ export default function Items() {
   const [selected, setSelected] = useState([]);
   const [editRowsModel, setEditRowsModel] = useState({});
   const [items, setItems] = useState([]);
+  const user = useSelector((state) => state.userReducer);
 
   const handleEditRowsModelChange = React.useCallback((model) => {
     console.log(model);
+
     setEditRowsModel(model);
   }, []);
 
@@ -57,6 +60,38 @@ export default function Items() {
     console.log(a);
     console.log(selected);
     await axios.delete("http://localhost:5000/items/delete", { data: { a } });
+  };
+
+  const onCellEditCommit = async () => {
+    console.log(editRowsModel);
+    let obj = {};
+
+    let temp = Object.keys(editRowsModel).reduce(function (r, k) {
+      return r.concat(k, editRowsModel[k]);
+    }, []);
+    console.log("temp", temp);
+    let temp1 = Object.keys(temp[1]).reduce(function (r, k) {
+      obj[k] = temp[1][k].value;
+    }, []);
+    // console.log("temp1", temp1);
+    // Object.keys(temp1[1]).reduce(function (r, k) {
+    //   obj[k] = temp1[1][k].value;
+    // }, []);
+    obj["id"] = temp[0];
+    obj["user_id"] = user.id;
+
+    console.log("items", obj);
+    await axios.put(`http://localhost:5000/items/${obj.id}`, obj);
+
+    // let item = {
+    //   id: Object.keys(editRowsModel)[0],
+    //   [Object.keys(editRowsModel[Object.keys(editRowsModel)[0]])[0]]:
+    //     editRowsModel[Object.keys(editRowsModel)[0]][
+    //       Object.keys(editRowsModel[Object.keys(editRowsModel)[0]])[0]
+    //     ].value,
+    // };
+    // console.log(item);
+    // await axios.put(`http://localhost:5000/items/${item.id}`, item);
   };
 
   useEffect(() => {
@@ -100,6 +135,8 @@ export default function Items() {
         }}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={handleEditRowsModelChange}
+        editMode="row"
+        onRowEditCommit={onCellEditCommit}
         sx={{
           boxShadow: 2,
           border: 2,

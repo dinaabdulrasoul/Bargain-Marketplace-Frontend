@@ -17,7 +17,7 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    if (user.id) {
+    if (localStorage.getItem("profile")) {
       setAuthenticated(true);
     }
   }, [user.id]);
