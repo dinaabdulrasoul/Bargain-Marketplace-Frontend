@@ -1,4 +1,3 @@
-
 # Bargain Marketplace (Front End)
 
 Bargain is an online marketplace that allows businesses to sell, market and showcase their products. It also offers individuals the opportunity to buy products from the platform easily and securely.
