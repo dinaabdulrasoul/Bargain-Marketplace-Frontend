@@ -27,11 +27,6 @@ Then
 ```
 npm start
 ```
-## Contributors
-<a href="https://github.com/dinaabdulrasoul/Bargain-Marketplace-Frontend/graphs/contributors">
-    
-  <img src="https://contributors-img.web.app/image?repo=dinaabdulrasoul/Bargain-Marketplace-Frontend" />
-</a>
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
