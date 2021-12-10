@@ -20,7 +20,7 @@ const AddProduct = () => {
     if (user.id) {
       setAuthenticated(true);
     }
-  }, []);
+  }, [user.id]);
 
   return isAuthenticated ? (
     <form onSubmit={handleSubmit(onSubmit)}>

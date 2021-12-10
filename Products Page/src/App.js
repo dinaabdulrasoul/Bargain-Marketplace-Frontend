@@ -36,7 +36,7 @@ const App = () => {
       let user = { name: decoded.first_name, id: decoded.id };
       dispatch(userAction({ user }));
     }
-  }, [user]);
+  }, []);
 
   // Mock products for design only
   // const mock_products = [

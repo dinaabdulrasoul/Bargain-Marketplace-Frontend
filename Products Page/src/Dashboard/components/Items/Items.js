@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import "./Items.css";
 import { getAllItemsByUsers } from "../../../api";
 import jwt from "jwt-decode";
+import axios from "axios";
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -45,23 +46,26 @@ export default function Items() {
   const [items, setItems] = useState([]);
 
   const handleEditRowsModelChange = React.useCallback((model) => {
+    console.log(model);
     setEditRowsModel(model);
   }, []);
 
-  const deleteItem = (selected) => {
+  const deleteItem = async () => {
     //here we will send request to delete this items from database
-    console.log("hey");
+
+    let a = Array.from(selected);
+    console.log(a);
+    console.log(selected);
+    await axios.delete("http://localhost:5000/items/delete", { data: { a } });
   };
 
   useEffect(() => {
     let token = localStorage.getItem("profile");
     let { id } = jwt(token);
-    console.log(id);
 
     //fetching data to show in rows
 
     const fetchItems = async (id) => {
-      console.log("fetchiiing", id);
       let urs = await getAllItemsByUsers(id);
       setItems(urs.data);
     };
@@ -81,6 +85,7 @@ export default function Items() {
           Delete Selected Items
         </Button>
       </div>
+
       <DataGrid
         rows={items}
         columns={columns}
@@ -90,6 +95,7 @@ export default function Items() {
         disableSelectionOnClick
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
+          console.log(selectedIDs);
           setSelected(selectedIDs);
         }}
         editRowsModel={editRowsModel}
