@@ -46,12 +46,13 @@ export default function DataGridDemo() {
 
   const handleEditRowsModelChange = React.useCallback((model) => {
     setEditRowsModel(model);
-    console.log(model);
+    console.log("permission ", model);
   }, []);
 
-  const removePermission = (selectionModel) => {
+  const addPermission = () => {
     //here we will send request to remove permission from this users from database
     //selectionModel it's a SET  of unique ids of the user on the table
+    console.log(selected);
   };
 
   useEffect(() => {
@@ -66,14 +67,12 @@ export default function DataGridDemo() {
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <div className="control-center">
-        {console.log(Users)}
         <Button
           disabled={selected.size ? false : true}
           variant="outlined"
-          color="error"
-          onClick={removePermission}
+          onClick={addPermission}
         >
-          Remove Selected Permission
+          Add Selected Permission
         </Button>
       </div>
       <DataGrid
@@ -86,7 +85,6 @@ export default function DataGridDemo() {
         onSelectionModelChange={(ids) => {
           const selectedIDs = new Set(ids);
           setSelected(selectedIDs);
-          console.log(selected);
         }}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={handleEditRowsModelChange}

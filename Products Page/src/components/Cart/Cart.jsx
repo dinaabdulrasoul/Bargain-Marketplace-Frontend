@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Payment from "../Checkout/Checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItem } from "../../api";
+import axios from "axios";
 
 const Cart = ({ cart }) => {
   const classes = useStyles();
@@ -17,7 +18,7 @@ const Cart = ({ cart }) => {
     const fetch = async () => {
       const data = await getCartItem(user.id);
       console.log("CAAAAARt", data.data);
-      setProducts((prev) => [...prev, ...data.data.cart]);
+      setProducts((prev) => [...data.data.cart]);
     };
     fetch();
   }, []);
@@ -31,37 +32,44 @@ const Cart = ({ cart }) => {
     </Typography>
   );
 
-  const FilledCart = () => (
-    <>
-      <Grid container spacing={3}>
-        {products.map((item) => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <CartItem item={item} />
-          </Grid>
-        ))}
-      </Grid>
-      <div className={classes.cardDetails}>
-        <Typography varient="h4">Subtotal:</Typography>
-        <div>
-          <Button
-            className={classes.emptyButton}
-            size="large"
-            type="button"
-            variant="contained"
-            color="secondary"
-            style={{ backgroundColor: "#B08844" }}
-          >
-            Empty Cart
-          </Button>
+  const FilledCart = () => {
+    const handleCheckout = async () => {
+      let data = products.map((item) => ({
+        price_id: item.Item.price_id,
+        quantity: item.Item.quantity,
+      }));
+      console.log(data);
+      let res = await axios.post(
+        "http://localhost:5000/create-checkout-session",
+        {
+          products: data,
+        }
+      );
 
-          {/* <Button className = {classes.checkoutButton} size='large' type='button' variant='contained' color='primary'
-                style = {{backgroundColor: "#EC8484"}}>
-                    Checkout
-                </Button> */}
+      window.location.href = res.data.url;
+    };
+    return (
+      <>
+        <Grid container spacing={3}>
+          {products.map((item) => (
+            <Grid item key={item.id} xs={12} sm={4}>
+              <CartItem item={item} />
+            </Grid>
+          ))}
+        </Grid>
+        <Button
+          variant="outlined"
+          label="submit checkout"
+          onClick={handleCheckout}
+        >
+          Submit checkout
+        </Button>
+        <div className={classes.cardDetails}>
+          <Typography varient="h4">Subtotal:</Typography>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  };
 
   if (!products.length) return "Loading...";
 
@@ -72,7 +80,7 @@ const Cart = ({ cart }) => {
       <Typography className={classes.title} variant="h4" gutterBottom>
         Your Shopping Cart
       </Typography>
-      <Payment />
+      {/* <Payment /> */}
       {!products.length ? <EmptyCart /> : <FilledCart />}
     </Container>
   );

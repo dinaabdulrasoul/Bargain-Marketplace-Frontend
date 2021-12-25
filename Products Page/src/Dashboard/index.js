@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const [page, setPage] = useState("Home");
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+
   const classes = useStyles();
   const data = useSelector((state) => state.userReducer);
   const handlePage = (text) => {
@@ -59,15 +60,21 @@ export default function Dashboard() {
     if (localStorage.getItem("profile")) {
       setAuthenticated(true);
     }
-    const fetchUser = async () => {
-      let user = await axios.get(`http://localhost:5000/users/${data.id}`);
-      console.log(user.data);
-      setUser(user.data);
-    };
-    fetchUser();
+    console.log("user data", data.id);
   }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      let res = await axios.get(`http://localhost:5000/users/${data.id}`);
+      console.log("fetch", res);
+      setUser(res.data);
+    };
+    fetch();
+  }, [isAuthenticated]);
+
   return isAuthenticated ? (
     <div className={classes.root}>
+      {console.log("dashboard", user)}
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>

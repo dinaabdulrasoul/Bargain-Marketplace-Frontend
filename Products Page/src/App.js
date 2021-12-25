@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     const fetch = async () => {
       let products = await getAllItems();
-      console.log("data", products);
+      console.log("data", products.data);
       setProducts(products.data);
     };
     fetch();
@@ -38,17 +38,6 @@ const App = () => {
     }
   }, []);
 
-  // Mock products for design only
-  // const mock_products = [
-  //   {id: 1, name: 'Apple Macbook', seller_name: 'z store', description: 'Magic iPad Keyboard', price: 300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0},
-  //   {id: 2, name: 'Dell Laptop', seller_name: 'y store', description: 'Magic iPad Keyboard', price: 300, image: 'https://blogs.windows.com/wp-content/uploads/prod/2016/09/Dell-Sept-14.jpg',quantity: 0},
-  //   {id: 3, name: 'Keyboard', seller_name: 'x store', description: 'Magic iPad Keyboard', price: 300, image: 'https://cdn.stamped.io/uploads/productImages/194093_6601656303789.jpg' ,quantity: 0},
-  //   {id: 4, name: 'Gaming Mouse', seller_name: 'amazon', description: 'Magic iPad Keyboard', price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0},
-  //   {id: 5, name: 'iPhone XR', seller_name: 'souq', description: 'Magic iPad Keyboard', price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0},
-  //   {id: 6, name: 'Addidas Running Shoes', seller_name: 'x', description: 'Magic iPad Keyboard', price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0},
-  //   {id: 7, name: 'Nike Running Shoes', seller_name: 'x', description: 'Magic iPad Keyboard', price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0},
-  //   {id: 8, name: 'Addias Backbag', seller_name: 'x', description: 'Magic iPad Keyboard', price:300, image: 'https://www.apple.com/v/macbook-pro-14-and-16/b/images/meta/macbook-pro-14-and-16_overview__fz0lron5xyuu_og.png?202111160445' ,quantity: 0}
-  // ];
   return (
     <Router>
       <div>

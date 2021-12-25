@@ -8,7 +8,7 @@ export default function Home({ user }) {
     <div className="dashboard-home">
       <CardComponent type="info" user={user} />
       <br />
-      <CardComponent type="balance" />
+      <CardComponent type="balance" user={user} />
     </div>
   );
 }
