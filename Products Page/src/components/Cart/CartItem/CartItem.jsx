@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -6,15 +6,22 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  ListItemIcon,
 } from "@material-ui/core";
 
 import useStyles from "./styles";
-import { useState } from "react";
+import axios from "axios";
+import { responsiveMap } from "antd/lib/_util/responsiveObserve";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, state }) => {
   const classes = useStyles();
-  //   const [count, setCount] = useState(item.quantity);
+  const [count, setCount] = useState();
+
+  const handleRemove = async () => {
+    let res = await axios.delete(`http://localhost:5000/cart`, {
+      data: { id: item.id },
+    });
+    state((old) => !old);
+  };
   return (
     <Card>
       <CardMedia
@@ -24,23 +31,15 @@ const CartItem = ({ item }) => {
       />
       <CardContent className={classes.cardContent}>
         <Typography variant="h4">{item.Item.title}</Typography>
-        <Typography variant="h5"></Typography>
+        <Typography variant="h5">Qty: {item.item_quantity}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <div className={classes.buttons}>
-          <Button type="button" size="small" onClick={() => {}}>
-            -
-          </Button>
-          {/* <Typography>{item.quantity}</Typography> */}
-          <Button type="button" size="small">
-            +
-          </Button>
-        </div>
         <Button
           variant="contained"
           type="button"
           style={{ backgroundColor: "#EC8484" }}
           color="primary"
+          onClick={handleRemove}
         >
           Remove
         </Button>

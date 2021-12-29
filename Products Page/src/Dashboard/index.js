@@ -13,12 +13,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Items from "./components/Items/Items";
 import Home from "./components/Home/Home";
 import Permission from "./components/Permission/Permission";
 import axios from "axios";
+import { userAction } from "../actions/user";
+import jwt from "jwt-decode";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +51,7 @@ export default function Dashboard() {
   const [page, setPage] = useState("Home");
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState({});
-
+  const dispatch = useDispatch();
   const classes = useStyles();
   const data = useSelector((state) => state.userReducer);
   const handlePage = (text) => {
@@ -64,6 +66,13 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
+    if (localStorage.getItem("profile")) {
+      console.log("heeeey");
+      let token = localStorage.getItem("profile");
+      let decoded = jwt(token);
+      let user = { name: decoded.first_name, id: decoded.id };
+      dispatch(userAction({ user }));
+    }
     const fetch = async () => {
       let res = await axios.get(`http://localhost:5000/users/${data.id}`);
       console.log("fetch", res);

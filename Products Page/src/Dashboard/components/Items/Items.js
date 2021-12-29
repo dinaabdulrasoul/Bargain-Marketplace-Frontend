@@ -120,7 +120,7 @@ export default function Items() {
           Delete Selected Items
         </Button>
       </div>
-
+      {console.log(items)}
       <DataGrid
         rows={items}
         columns={columns}

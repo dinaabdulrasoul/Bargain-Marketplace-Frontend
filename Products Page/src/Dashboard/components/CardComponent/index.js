@@ -15,13 +15,15 @@ import { useSelector } from "react-redux";
 
 const Balance = (user) => {
   const [deposit, setDeposit] = React.useState(0);
+  const [reload, setReload] = React.useState(false);
   const handleDeposit = (e) => {
     let input = e.target.value;
     setDeposit(input);
   };
   const data = useSelector((state) => state.userReducer);
   const submitDeposit = async () => {
-    axios.post(`http://localhost:5000/users/${data.id}`);
+    let data2 = { id: data.id, balance: Number(deposit) };
+    await axios.post(`http://localhost:5000/deposit`, data2);
   };
 
   return (

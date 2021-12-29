@@ -7,7 +7,12 @@ import {
   AddProduct,
 } from "./components";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Auth from "./components/Auth/Auth";
 import { getAllItems } from "./api";
@@ -28,20 +33,22 @@ const App = () => {
       setProducts(products.data);
     };
     fetch();
-
-    if (localStorage.getItem("profile")) {
-      console.log("heeeey");
-      let token = localStorage.getItem("profile");
-      let decoded = jwt(token);
-      let user = { name: decoded.first_name, id: decoded.id };
-      dispatch(userAction({ user }));
-    }
   }, []);
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("profile")) {
+  //     console.log("heeeey");
+  //     let token = localStorage.getItem("profile");
+  //     let decoded = jwt(token);
+  //     let user = { name: decoded.first_name, id: decoded.id };
+  //     dispatch(userAction({ user }));
+  //   }
+  // }, [dispatch]);
 
   return (
     <Router>
+      <Navbar />
       <div>
-        <Navbar />
         <Routes>
           <Route
             exact
@@ -49,7 +56,7 @@ const App = () => {
             element={<Products products={products} />}
           ></Route>
 
-          <Route path="/auth" exact element={<Auth />} />
+          <Route exact path="/auth" element={<Auth />} />
           <Route exact path="/cart" element={<Cart cart={cart} />}></Route>
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route
@@ -58,13 +65,6 @@ const App = () => {
             element={<Cart cart={{ line_items: [] }} />}
           ></Route>
 
-          {products.map((p) => (
-            <Route
-              exact
-              path={`products/${p.id}`}
-              element={<SingleProduct product={p} />}
-            ></Route>
-          ))}
           <Route exact path="/Create" element={<AddProduct />}></Route>
         </Routes>
       </div>

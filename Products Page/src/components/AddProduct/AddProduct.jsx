@@ -54,6 +54,14 @@ const AddProduct = () => {
         defaultValue=""
       />
 
+      <label>Product Quantity</label>
+      <Controller
+        render={({ field }) => <InputNumber {...field} min={1} />}
+        name="quantity"
+        control={control}
+        defaultValue=""
+      />
+
       <input type="submit" />
     </form>
   ) : (

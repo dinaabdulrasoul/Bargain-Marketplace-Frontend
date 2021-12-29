@@ -3,11 +3,14 @@ import { Grid } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import TextField from "@mui/material/TextField";
+import jwt from "jwt-decode";
+import { userAction } from "../../actions/user";
+import { useDispatch, useSelector } from "react-redux";
 
 //const Products = ({products, onAddToCart})
 const Products = ({ products }) => {
   const [data, setData] = useState(products);
-
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const filter = (e) => {
@@ -28,6 +31,16 @@ const Products = ({ products }) => {
     console.log("effect", products);
     setData(products);
   }, [products]);
+
+  useEffect(() => {
+    if (localStorage.getItem("profile")) {
+      console.log("heeeey");
+      let token = localStorage.getItem("profile");
+      let decoded = jwt(token);
+      let user = { name: decoded.first_name, id: decoded.id };
+      dispatch(userAction({ user }));
+    }
+  }, []);
 
   return (
     <main className={classes.content}>

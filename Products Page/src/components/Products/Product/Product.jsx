@@ -27,37 +27,29 @@ const Product = ({ product }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea component={Link} to={`products/${product.id}`}>
-        <CardMedia
-          className={classes.media}
-          image={product.image}
-          title={product.title}
-        />
-        <CardContent>
-          <div className={classes.cardContent}>
-            <Typography variant="h6" gutterButtom>
-              {product.title}
-            </Typography>
-            <Typography variant="h6" style={{ color: "#85bb65" }}>
-              Price: {product.price} EGP
-            </Typography>
-          </div>
-          <Typography variant="h6">
-            Seller: {product.User.first_name}
+      <CardMedia
+        className={classes.media}
+        image={product.image}
+        title={product.title}
+      />
+      <CardContent>
+        <div className={classes.cardContent}>
+          <Typography variant="h6" gutterButtom>
+            {product.title}
           </Typography>
-        </CardContent>
-        <CardActions disableSpacing className={classes.cardActions}>
-          {/*<IconButton aria-label = "Add to Cart" onClick ={()=> onAddToCart(product.id, 1)}> */}
-          <IconButton
-            onClick={() => handleClick(product.id)}
-            aria-label="Add to Cart"
-            component={Link}
-            to="/cart"
-          >
-            <AddShoppingCart />
-          </IconButton>
-        </CardActions>
-      </CardActionArea>
+          <Typography variant="h6" style={{ color: "#85bb65" }}>
+            Price: {product.price} EGP
+          </Typography>
+        </div>
+        <Typography variant="h6">Seller: {product.User.first_name}</Typography>
+      </CardContent>
+
+      <IconButton
+        onClick={() => handleClick(product.id)}
+        aria-label="Add to Cart"
+      >
+        <AddShoppingCart />
+      </IconButton>
     </Card>
   );
 };
